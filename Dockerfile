@@ -15,6 +15,8 @@ RUN apt update \
   && apt install build-essential -y \
   && gem update --system \
   && apt install ruby-dev -y
+  
+RUN curl -sL firebase.tools | bash
 
 RUN apt install openjdk-8-jdk wget unzip git -y
 RUN wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -qO android-sdk.zip
