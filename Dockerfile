@@ -2,7 +2,10 @@ FROM ubuntu:18.04
 
 ENV VERSION_SDK_TOOLS "3859397"
 
-ENV FIREBASE_CLI_HOME "/usr/local/bin"
+ENV LANG "en_US.UTF-8"
+ENV LANGUAGE "en_US.UTF-8"
+ENV LC_ALL "en_US.UTF-8"
+
 ENV ANDROID_HOME "/opt/android"
 ENV ANDROID_SDK_ROOT="/opt/android-sdk"
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:$ANDROID_SDK_ROOT/tools
@@ -32,3 +35,8 @@ RUN echo "y" | sdkmanager  "platform-tools" \
 #touch /home/ubuntu/.android/repositories.cfg \
 #mkdir /opt/android-sdk/platforms \
 RUN echo "no" | avdmanager -v create avd -f -n MyAVD -k "system-images;android-25;google_apis;armeabi-v7a" -p "/opt/android-sdk/avd"
+
+#firebase-tools setup
+ADD https://github.com/firebase/firebase-tools/releases/download/v7.4.0/firebase-tools-linux firebase-tools-linux
+RUN chmod +x firebase-tools-linux
+RUN ./firebase-tools-linux --open-sesame appdistribution 
