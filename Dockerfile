@@ -20,8 +20,6 @@ RUN apt update \
   && gem update --system \
   && apt install ruby-dev -y
   
-RUN curl -sL firebase.tools | bash
-
 RUN apt install openjdk-8-jdk wget unzip git -y
 RUN wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -qO android-sdk.zip
 RUN unzip android-sdk.zip -d /opt/android
@@ -37,6 +35,8 @@ RUN echo "y" | sdkmanager  "platform-tools" \
 RUN echo "no" | avdmanager -v create avd -f -n MyAVD -k "system-images;android-25;google_apis;armeabi-v7a" -p "/opt/android-sdk/avd"
 
 #firebase-tools setup
-ADD https://github.com/firebase/firebase-tools/releases/download/v7.4.0/firebase-tools-linux firebase-tools-linux
-RUN chmod +x firebase-tools-linux
-RUN ./firebase-tools-linux --open-sesame appdistribution 
+# Node
+FROM node:12.9.0-buster-slim
+
+# install Firebase CLI
+RUN npm install -g firebase-tools
