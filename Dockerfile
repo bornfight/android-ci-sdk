@@ -11,6 +11,9 @@ ENV ANDROID_SDK_ROOT="/opt/android-sdk"
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:$ANDROID_SDK_ROOT/tools
 ENV DEBIAN_FRONTEND noninteractive
 
+ADD https://firebase.tools/bin/linux/latest firebase-tools-linux
+RUN chmod +x firebase-tools-linux
+
 RUN apt update \
   #need ruby for bundler
   && apt install -y ruby \
@@ -20,6 +23,7 @@ RUN apt update \
   && gem update --system \
   && apt install ruby-dev -y
   
+
 RUN apt install openjdk-8-jdk wget unzip git -y
 RUN wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -qO android-sdk.zip
 RUN unzip android-sdk.zip -d /opt/android
