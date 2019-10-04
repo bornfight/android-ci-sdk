@@ -33,10 +33,3 @@ RUN echo "y" | sdkmanager  "platform-tools" \
 #touch /home/ubuntu/.android/repositories.cfg \
 #mkdir /opt/android-sdk/platforms \
 RUN echo "no" | avdmanager -v create avd -f -n MyAVD -k "system-images;android-25;google_apis;armeabi-v7a" -p "/opt/android-sdk/avd"
-
-#firebase-tools setup
-# Node
-FROM node:12.9.0-buster-slim
-
-# install Firebase CLI
-RUN npm install -g firebase-tools
