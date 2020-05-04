@@ -14,7 +14,12 @@ ENV DEBIAN_FRONTEND noninteractive
 ADD https://firebase.tools/bin/linux/latest firebase-tools-linux
 RUN chmod +x firebase-tools-linux
 
-RUN apt update \
+RUN  apt update \
+  && apt install wget unzip -y \
+  && apt install -y nodejs npm \
+  && npm install -g n \
+  && n lts \
+  && npm install -g yarn \
   #need ruby for bundler
   && apt install -y ruby \
   #need bundler to use fastlane
@@ -24,7 +29,7 @@ RUN apt update \
   && apt install ruby-dev -y
   
 
-RUN apt install openjdk-8-jdk wget unzip git -y
+RUN apt install openjdk-8-jdk git -y
 RUN wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -qO android-sdk.zip
 RUN unzip android-sdk.zip -d /opt/android
 RUN rm android-sdk.zip
