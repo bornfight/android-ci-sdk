@@ -29,7 +29,7 @@ RUN  apt update \
   && apt install ruby-dev -y
   
 
-RUN apt install openjdk-8-jdk git -y
+RUN apt install openjdk-11-jdk git -y
 RUN wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -qO android-sdk.zip
 RUN unzip android-sdk.zip -d /opt/android
 RUN rm android-sdk.zip
